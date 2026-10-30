@@ -10,24 +10,19 @@ import testProducts from "../data/testProducts.json";
 function ShoppingPage() {
 
   const [ allProducts, setAllProducts ] = useState(testProducts) 
-  //* initial state. change to empty array when finished with add functionality
+  const [ searchValue, setSearchValue ] = useState("")
 
   return (
     <>
 
       <h1>Shopping List!</h1>
 
+      <AddForm setAllProducts={setAllProducts}/>
+
+      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue}/>
+
       {/* //* all elements of the shopping list will be here */}
-      {allProducts.map((eachProduct, index) => {
-        return (
-          <div className="product-card" key={index}>
-            <h3>{eachProduct.name}</h3>
-            <p>{eachProduct.price}€</p>
-            <p>{eachProduct.isPurchased === true ? "✅" : "🟡"}</p>
-            <button>Buy</button>
-          </div>
-        )
-      })}
+      <ProductList allProducts={allProducts} searchValue={searchValue} setAllProducts={setAllProducts}/>
 
     </>
   )
